@@ -1,17 +1,45 @@
-import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import React, { createContext, useState } from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import About from "./pages/About";
 import Welcome from "./pages/Welcome";
 import BootstrapNav from "./components/navigation/BootstrapNav";
 import { Container } from "react-bootstrap";
-import './app.css'
+import "./app.css";
+
+export const ScreenContext = createContext();
+
 function App() {
+  const [screenSize, setScreenSize] = useState();
+  const checkScreenSize = () => {
+    if (window.screen.width) {
+      setScreenSize(window.screen.availWidth);
+    }
+  };
+
+  const screenCheckObject = {
+    size: screenSize,
+  };
+
+  window.addEventListener("resize", () => {
+    checkScreenSize();
+  });
+  window.addEventListener("load", () => {
+    checkScreenSize();
+  });
+
   return (
-    <Container fluid className="p-0">
+    <Container fluid className="p-5 ">
       <Router>
-        <BootstrapNav />
-        <Switch>
-          <Route exact path="/" component={Welcome} />
-        </Switch>
+        <BootstrapNav screenSize={screenSize} />
+
+        <ScreenContext.Provider value={screenCheckObject.size}>
+          <Route exact path="/">
+            <Welcome />
+          </Route>
+        </ScreenContext.Provider>
+        <Route exact path="/about">
+          <About />
+        </Route>
       </Router>
     </Container>
   );
