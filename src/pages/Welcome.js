@@ -8,18 +8,22 @@ const Welcome = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      headingToBeRemoved.current.style.cssText = `
+      if(headingToBeRemoved.current !== null){
+        headingToBeRemoved.current.style.cssText = `
      color: white;
      transition: 2s;
     
      `;
+      }
 
       setTimeout(() => {
-        headingToBeRemoved.current.remove();
+        if(headingToBeRemoved.current !== null){
+          headingToBeRemoved.current.remove();
         paragraphElement.current.style.cssText = `
       transition:2s;
       color:red;
       `;
+        }
       }, 3000);
 
       

@@ -1,6 +1,7 @@
-import React, { useState, useEffect,useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Container, Col } from "react-bootstrap";
-import PieChart from '../chart/PieChart';
+import PieChart from "../chart/PieChart";
+import RegularChart from "../chart/RegularChart";
 import { ScreenContext } from "../../App";
 
 //Component that collects user input in ranges for hours workingk,studying, and leisure time.
@@ -15,14 +16,39 @@ const DataCreator = () => {
     freeTime: 0,
     total: 0,
   });
- 
-  const screenValue= useContext(ScreenContext);
+  const [graphType, setGraphType] = useState({circular: true, bar: false});
 
-  const pieChartValues=()=>{
-      if(totalHours.total !== 0){
-        return <PieChart work={totalHours.workHours} study={totalHours.studyHours} leisure={totalHours.freeTime} screen={screenValue}/>
-      }
-  }
+  const screenValue = useContext(ScreenContext);
+
+  
+
+  const ChartValues = () => {
+    if (totalHours.total !== 0 && graphType.circular == true) {
+      return (
+        <div>
+          <PieChart
+            work={totalHours.workHours}
+            study={totalHours.studyHours}
+            leisure={totalHours.freeTime}
+            screen={screenValue}
+          />
+        </div>
+      );
+    }else if(totalHours.total !== 0 && graphType.bar == true){
+      return(
+        <div>
+              <RegularChart
+            workHours={totalHours.workHours}
+            studyHours={totalHours.studyHours}
+            freeTime={totalHours.freeTime}
+            totalHours={totalHours.total}
+            screen={screenValue / 4}
+          />
+        </div>
+      )
+    }
+    
+  };
 
   const finalValueButton = () => {
     const resetvalues = {
@@ -79,11 +105,13 @@ const DataCreator = () => {
       "Leisure ",
       freeHours.value
     );
-
-    
+    console.log(screenValue);
   });
+
   return (
+    
     <Container className="m-2 p-1 justify-content-center">
+      {ChartValues()}
       <Col className="d-flex flex-column p-2">
         <label htmlFor="dataPointStudying">Select time studying</label>
         <input
@@ -129,9 +157,21 @@ const DataCreator = () => {
         Hours: {freeHours.value}
       </Col>
 
+      <Col className="d-flex  p-1">
+          
+          
+        <input type="radio" name="graph" id="circular" value="circular" onClick={()=>{setGraphType({circular:true, bar:false})}}/>
+        <label htmlFor="circular">Circle Graph</label>
+         
+        <input type="radio" name="graph" id="bar" value='bar' onClick={()=>{setGraphType({circular:false, bar: true})}}  />
+        <label htmlFor="bar">Bar Graph </label>
+        
+
+      </Col>
+
       {finalValueButton()}
 
-      {pieChartValues()}
+      
     </Container>
   );
 };

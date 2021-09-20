@@ -4,6 +4,8 @@ import React,{useEffect} from "react";
 import {
   VictoryPie,
   VictoryLabel,
+  VictoryContainer,
+  VictoryTheme,
 } from "victory";
 
 const PieChart = ({ work, study, leisure,screen }) => {
@@ -15,6 +17,8 @@ const PieChart = ({ work, study, leisure,screen }) => {
   return (
     <svg viewBox="-100 0 500 250">
     <VictoryPie
+    theme={VictoryTheme.material}
+      animate={{duration: 3000, onLoad:{duration:100}}}
       standalone={false}
       colorScale={['red','teal','slategrey']}
       width={300} height={300}
