@@ -5,6 +5,7 @@ import Welcome from "./pages/Welcome";
 import BootstrapNav from "./components/navigation/BootstrapNav";
 import { Container } from "react-bootstrap";
 import "./app.css";
+import CurrentTotalData from "./pages/CurrentTotalData";
 
 export const ScreenContext = createContext();
 
@@ -39,6 +40,9 @@ function App() {
         </ScreenContext.Provider>
         <Route exact path="/about">
           <About />
+        </Route>
+        <Route exact path="/aggregate">
+        <CurrentTotalData/>
         </Route>
       </Router>
     </Container>

@@ -3,6 +3,8 @@ import { Container, Col } from "react-bootstrap";
 import PieChart from "../chart/PieChart";
 import RegularChart from "../chart/RegularChart";
 import { ScreenContext } from "../../App";
+import ModalSave from "../ModalSave";
+
 
 //Component that collects user input in ranges for hours workingk,studying, and leisure time.
 //It also delivers the inputed value to a graph component for visualization.
@@ -17,13 +19,20 @@ const DataCreator = () => {
     total: 0,
   });
   const [graphType, setGraphType] = useState({circular: true, bar: false});
-
-  const screenValue = useContext(ScreenContext);
+  const [modalActivator,setModalActivator]= useState(false);
 
   
 
+  const screenValue = useContext(ScreenContext);
+
+  const activateModal=()=>{
+    if(totalHours.total !== 0){
+      setModalActivator(true);
+    }
+  }
+
   const ChartValues = () => {
-    if (totalHours.total !== 0 && graphType.circular == true) {
+    if (totalHours.total !== 0 && graphType.circular === true) {
       return (
         <div>
           <PieChart
@@ -34,7 +43,7 @@ const DataCreator = () => {
           />
         </div>
       );
-    }else if(totalHours.total !== 0 && graphType.bar == true){
+    }else if(totalHours.total !== 0 && graphType.bar === true){
       return(
         <div>
               <RegularChart
@@ -49,6 +58,8 @@ const DataCreator = () => {
     }
     
   };
+
+  
 
   const finalValueButton = () => {
     const resetvalues = {
@@ -106,12 +117,16 @@ const DataCreator = () => {
       freeHours.value
     );
     console.log(screenValue);
+    activateModal();
+   
   });
 
   return (
     
     <Container className="m-2 p-1 justify-content-center">
+      
       {ChartValues()}
+     
       <Col className="d-flex flex-column p-2">
         <label htmlFor="dataPointStudying">Select time studying</label>
         <input
@@ -170,6 +185,10 @@ const DataCreator = () => {
       </Col>
 
       {finalValueButton()}
+       <ModalSave trigger={modalActivator}/>
+     
+
+      
 
       
     </Container>

@@ -46,6 +46,10 @@ const BootstrapNav = ({ screenSize }) => {
               <LinkContainer to ="/about">
               <Nav.Link>About</Nav.Link>
               </LinkContainer>
+
+              <LinkContainer to ="/aggregate">
+              <Nav.Link>Agreggate Data</Nav.Link>
+              </LinkContainer>
             </Nav>
           </Navbar.Collapse>
         </Container>

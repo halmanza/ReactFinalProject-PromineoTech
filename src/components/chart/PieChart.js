@@ -4,7 +4,6 @@ import React,{useEffect} from "react";
 import {
   VictoryPie,
   VictoryLabel,
-  VictoryContainer,
   VictoryTheme,
 } from "victory";
 

@@ -1,6 +1,8 @@
 import React from 'react';
 import { Container,Accordion } from 'react-bootstrap';
 
+
+
 const About = () => {
     return (
     
@@ -17,7 +19,7 @@ const About = () => {
     <Accordion.Header>How can you help?</Accordion.Header>
     <Accordion.Body>
       We appreciate all feedback to improve this service and constructive feedback enables us to provide a better 
-      result for users. If you notice a particular bug feel Time Consumer, please feel free to reach out to me at bugs@timeconsumer.com .
+      result for users. If you notice a particular bug in Time Consumer, please feel free to reach out to me at bugs@timeconsumer.com .
       Currently, the Time Consumer project is a one man show and I do my best to respond within 48 hours of receiving an email.
 
     </Accordion.Body>
@@ -32,6 +34,7 @@ const About = () => {
 </Accordion>
         
         </Container>
+        
     </Container>
         
     )
