@@ -23,7 +23,7 @@ const DataGetter = (props) => {
       try{
         //   replace url with environment 
         let data = await fetch(
-            `BACK_URL`,
+            `https://getting.azurewebsites.net/api/HttpTrigger1?code=BACK_URL&id=${personIdNumber}`,
             {
                 method: 'GET',
                 headers: {"Content-Type" : "application/json"},
