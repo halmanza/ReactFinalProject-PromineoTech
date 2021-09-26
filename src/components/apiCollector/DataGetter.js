@@ -21,7 +21,7 @@ const DataGetter = (props) => {
 
   const getData = async () => {
       try{
-        //   replace url with environment variable 
+        //   replace url with environment 
         let data = await fetch(
             `BACK_END_URL`,
             {
