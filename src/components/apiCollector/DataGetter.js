@@ -23,7 +23,7 @@ const DataGetter = (props) => {
       try{
         //   replace url with environment 
         let data = await fetch(
-            `BACK_END_URL${personIdNumber}`,
+            `BACK_END_URL`,
             {
                 method: 'GET',
                 headers: {"Content-Type" : "application/json"},
